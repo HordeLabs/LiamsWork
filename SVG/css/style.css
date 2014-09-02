@@ -6,6 +6,30 @@
         font-style: normal;
 
 }
+#picker {
+	
+	
+	padding:0;
+	border:0;
+	width:10%;
+	height:40px;
+	border-right:20px solid #5C97BF;
+	line-height:20px;
+	background-color:#aaa;
+	
+}
+.submit{
+	width:10%;
+	height:40px;
+	line-height:20px;
+	background-color:#aaa;
+	
+}
+.close{
+	line-height:20px;
+	background-color:#aaa;
+	
+}
 
 .title{
 	font-family: Quicksand;
