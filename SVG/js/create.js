@@ -1,26 +1,17 @@
 var environment = {};
 environment.shapes = Array();
 var paper = null;
+
 window.onload = function() {
     // Creates canvas 1000 × 1000 at 30, 100
     
-        paper = Raphael(30, 100, 1000, 1000);
+        paper = Raphael(30, 110, 1000, 1000);
     var rect1 = paper.rect(0, 0, 1000, 1000).attr({fill: "#444"}),
     	rect = paper.rect(55, 130, 50, 50).attr({fill: "#34C8FF",stroke: "0"}),
         circle = paper.circle(80, 100, 25).attr({fill: "#34C8FF",stroke: "0"}),
         path = paper.path("M50,68 L77,23 L105,68 z").attr({fill: "#34C8FF",stroke: "0"});
 		
-		$('#picker').colpick({
-			layout:'hex',
-			submit:0,
-			colorScheme:'light',
-			onChange:function(hsb,hex,rgb,el,bySetColor) {
-				$(el).css('border-color','#'+hex);
-				if(!bySetColor) $(el).val(hex);
-			}
-		}).keyup(function(){
-		$(this).colpickSetColor(this.value);
-		});
+		
 
 
     var start = function(){ // function for the start of the drag
@@ -30,9 +21,11 @@ window.onload = function() {
             this.lastdy ? this.oy += this.lastdy : this.oy = 0;
             // console.log(this);
             this.attrs.class = "added";
-        		        		
+           this.attr('class','context');
+           
+        		  		
         		
-            //this.setAttribute("class", "added");
+            
             if(!this.clonedShape){ // if this shape is a clone then we don't want to create a new one
                 var cloned = this.clone();
                 cloned.drag(move, start, up);
@@ -52,14 +45,14 @@ window.onload = function() {
             var ft = paper.freeTransform(this, {
                 keepRatio: true // not working?
             }, function(element){
-                console.log(element);
+                
                 selected = element;
+               
                 paper.forEach(function(e){
                     e.attr({stroke: false});
                 })
                 selected.subject.attr({stroke: '#FFF', "stroke-width": "3"});
                 var colour =$("#picker").css( 'border-right-color' );
-                console.log(colour);
                 selected.subject.attr({"fill": colour});
             }).showHandles().apply();
             // console.log(environment.shapes)
@@ -86,24 +79,80 @@ function go(){
     console.log(JSON.stringify(environment.shapes));
     console.log(environment.shapes);
 }
+
+
+function pick(){
+	
+	$("#box").show();
+}
+
+$(document).mouseup(function (e)
+{
+    var container = $("#box");
+
+    if (!container.is(e.target) // if the target of the click isn't the container...
+        && container.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+        container.hide();
+    }
+});
+
+
+function change_colour(element){
+	
+	var selected_colour = $(element).css( 'backgroundColor' );
+
+	$("#picker").css("border-right",selected_colour);
+}
+
+
 $(document).ready(function(){
 
 $('#close').on('click', function () {
+		deleteItem();	
+    
+	
+});
+});
+
+
+$(document).ready(function(){
+
+
+
+$(document).on("mousedown", "circle",function(e){
+    
+    if (e.which == 3){
+    e.cancelBubble = true;
+    e.preventDefault();
+    e.stopPropagation();
+        alert("hi");
+        return false;
+        }
+});
+});
+
+
+
+
+function deleteItem(){
 	if(selected.freeTransform){
         selected.freeTransform.unplug();
     } else {
         selected.unplug();
     }
     selected.subject.remove();
-	
-    
-	
-});
-});
+
+}
+
 function shapeOnClick()
 {
 
 	var colour =$("#picker").css( 'border-color' );
 	$(selected).attr({fill:colour});	
 }
+
+
+
+
 

@@ -16,6 +16,8 @@
 	border-right:20px solid #5C97BF;
 	line-height:20px;
 	background-color:#aaa;
+	float:left;
+	
 	
 }
 .submit{
@@ -23,14 +25,58 @@
 	height:40px;
 	line-height:20px;
 	background-color:#aaa;
-	
-}
+	float:left;
+	}
 .close{
 	line-height:20px;
 	background-color:#aaa;
+	float:left;
 	
 }
+#box{
+	background-color:#aaa;
+	width:8.5%;
+	height:120px;
+	float:left;
+	display:none;
+}
+#red{
+	background-color:red;
+}
+#green{
+	background-color:green;
+}
+#blue{
+	background-color:blue;
+}
+#orange{
+	background-color:orange;
+}
+#yellow{
+	background-color:yellow;
+}
+#black{
+	background-color:black;
+}
+#brown{
+	background-color:brown;
+}
+#white{
+	background-color:white;
+}
+#grey{
+	background-color:grey;
+}
 
+.colour{
+	height:30px;
+	width:30px;
+	margin-left:5px;
+	margin-top:5px;
+	background-color:#FFF;
+	float:left;
+	
+}
 .title{
 	font-family: Quicksand;
 	text-align:center;
@@ -38,7 +84,7 @@
 	margin-top:2%;
 	margin-bottom:2%;
 	margin-right:36%;
-	margin-left:33%;
+	
 	display:inline;
 	float:right;
 	color:#9A9A9A;
@@ -137,3 +183,11 @@ body{
             #run {
                 font-size: 2em;
             }
+.target
+    {
+            border:solid 1px #ffccee;   
+            padding:5px;
+            background-color:Blue;
+            color:#fff;
+            display:inline;
+    }
