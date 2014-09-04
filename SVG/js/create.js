@@ -117,7 +117,7 @@ $('#close').on('click', function () {
 
 $(document).ready(function(){
 
-$(document).on("mousedown", "circle",function(e){
+$(document).on("mousedown", "circle,rect,path",function(e){
     
     if (e.which == 3){
     e.cancelBubble = true;
