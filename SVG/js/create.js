@@ -6,7 +6,7 @@ var colour = null;
 window.onload = function() {
     // Creates canvas 1000 × 1000 at 30, 100
     
-        paper = Raphael(30, 110, 1000, 1000);
+        paper = Raphael(30, 110, 1100, 500);
         paper.canvas.style.backgroundColor = '#444';
     var rect = paper.rect(55, 130, 50, 50).attr({fill: "#34C8FF",stroke: "0"}),
         circle = paper.circle(80, 100, 25).attr({fill: "#34C8FF",stroke: "0"}),
@@ -76,7 +76,7 @@ function go(){
     });
     console.clear();
     console.log(JSON.stringify(environment.shapes));
-    console.log(environment.shapes);
+    
 }
 
 
@@ -153,6 +153,7 @@ var cloned =selected.subject.clone();
                 
             }).showHandles().apply();
 ;
+	selected.subject.attrs.class = "added";
 
 	$(".context_menu").hide();
 	
@@ -165,6 +166,7 @@ function shapeOnClick()
 	
                 selected.subject.attr({"fill": colour});	
                 $(".context_menu").hide();
+                
 }
 
 
@@ -177,3 +179,55 @@ function sendFront(){
 	$(".context_menu").hide();
 }
 
+function hideHandle(){
+var cloned =selected.subject.clone();
+	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
+                
+                selected = element;
+               
+                paper.forEach(function(e){
+                    e.attr({stroke: false});
+                })
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
+                
+            }).hideHandles().apply();
+;
+	selected.subject.attrs.class = "added";
+	$(".context_menu").hide();
+
+if(selected.freeTransform){
+        selected.freeTransform.unplug();
+    } else {
+        selected.unplug();
+    }
+    selected.subject.remove();
+	 $(".context_menu").hide();
+	
+}
+
+
+function showHandle(){
+var cloned =selected.subject.clone();
+	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
+                
+                selected = element;
+               
+                paper.forEach(function(e){
+                    e.attr({stroke: false});
+                })
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
+                
+            }).showHandles().apply();
+;
+
+	$(".context_menu").hide();
+
+if(selected.freeTransform){
+        selected.freeTransform.unplug();
+    } else {
+        selected.unplug();
+    }
+    selected.subject.remove();
+	 $(".context_menu").hide();
+	
+}

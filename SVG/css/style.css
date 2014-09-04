@@ -43,6 +43,7 @@
 	float:left;
 	display:none;
 	margin-top:2.5%;
+	margin-left:90%;
 }
 #red{
 	background-color:red;
@@ -203,7 +204,7 @@ body{
 	float:left;
 	display:none;
 	font-family: Quicksand;
-	margin-left:82%;
+	margin-left:90%;
 	margin-top:0.5%;
 	
 }
