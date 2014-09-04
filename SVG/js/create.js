@@ -1,13 +1,14 @@
 var environment = {};
 environment.shapes = Array();
 var paper = null;
+var colour = null;
 
 window.onload = function() {
     // Creates canvas 1000 × 1000 at 30, 100
     
         paper = Raphael(30, 110, 1000, 1000);
-    var rect1 = paper.rect(0, 0, 1000, 1000).attr({fill: "#444"}),
-    	rect = paper.rect(55, 130, 50, 50).attr({fill: "#34C8FF",stroke: "0"}),
+        paper.canvas.style.backgroundColor = '#444';
+    var rect = paper.rect(55, 130, 50, 50).attr({fill: "#34C8FF",stroke: "0"}),
         circle = paper.circle(80, 100, 25).attr({fill: "#34C8FF",stroke: "0"}),
         path = paper.path("M50,68 L77,23 L105,68 z").attr({fill: "#34C8FF",stroke: "0"});
 		
@@ -31,7 +32,7 @@ window.onload = function() {
                 cloned.drag(move, start, up);
                 this.cloneedShape = true;
             }
-            this.translate(550,200);
+            this.translate(400,200);
 
     },
         move = function(dx, dy){ // function for the move event
@@ -51,7 +52,7 @@ window.onload = function() {
                 paper.forEach(function(e){
                     e.attr({stroke: false});
                 })
-                selected.subject.attr({stroke: '#FFF', "stroke-width": "3"});
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
                 
             }).showHandles().apply();
             // console.log(environment.shapes)
@@ -60,8 +61,7 @@ window.onload = function() {
     rect.drag(move, start, up);
     circle.drag(move, start, up);
     path.drag(move, start, up);
-
-};
+	};
 
 function go(){
     environment.shapes = Array();
@@ -98,21 +98,15 @@ $(document).mouseup(function (e)
 
 
 function change_colour(element){
-	
-	var selected_colour = $(element).css( 'backgroundColor' );
-
-	$("#picker").css("border-right-color",selected_colour);
+			
+	colour = $(element).css( 'backgroundColor' );
+	shapeOnClick();
+	$("#picker").hide();
+	$("#box").hide();
 }
 
 
-$(document).ready(function(){
 
-$('#close').on('click', function () {
-		deleteItem();	
-    
-	
-});
-});
 
 
 $(document).ready(function(){
@@ -155,7 +149,7 @@ var cloned =selected.subject.clone();
                 paper.forEach(function(e){
                     e.attr({stroke: false});
                 })
-                selected.subject.attr({stroke: '#FFF', "stroke-width": "3"});
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
                 
             }).showHandles().apply();
 ;
@@ -168,12 +162,18 @@ var cloned =selected.subject.clone();
 function shapeOnClick()
 {
 
-	var colour =$("#picker").css( 'border-right-color' );
+	
                 selected.subject.attr({"fill": colour});	
                 $(".context_menu").hide();
 }
 
 
-
-
+function sendBack(){
+	selected.subject.toBack()+1;
+	$(".context_menu").hide();
+}
+function sendFront(){
+	selected.subject.toFront();
+	$(".context_menu").hide();
+}
 

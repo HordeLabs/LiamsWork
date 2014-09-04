@@ -13,10 +13,12 @@
 	border:0;
 	width:10%;
 	height:40px;
-	border-right:20px solid #5C97BF;
+	border-right:20px solid #FFF;
 	line-height:20px;
 	background-color:#aaa;
 	float:left;
+	font-family: Quicksand;
+	display:none;
 	
 	
 }
@@ -26,19 +28,21 @@
 	line-height:20px;
 	background-color:#aaa;
 	float:left;
+	font-family: Quicksand;
+	margin-top:2.5%;
+	margin-left:2.5%;
 	}
-.close{
-	line-height:20px;
-	background-color:#aaa;
-	float:left;
-	
+.divider{
+	margin-top:0px;
+	margin-bottom:0px;
 }
 #box{
 	background-color:#aaa;
 	width:8.5%;
-	height:120px;
+	height:110px;
 	float:left;
 	display:none;
+	margin-top:2.5%;
 }
 #red{
 	background-color:red;
@@ -75,6 +79,7 @@
 	margin-top:5px;
 	background-color:#FFF;
 	float:left;
+	font-family: Quicksand;
 	
 }
 .title{
@@ -197,10 +202,14 @@ body{
 	height:8.5%;
 	float:left;
 	display:none;
+	font-family: Quicksand;
+	margin-left:82%;
+	margin-top:0.5%;
 	
 }
 .context_menu_list{
 	margin-bottom:5%;
 	color:#000;
 	text-align:center;
+	font-family: Quicksand;
 }
