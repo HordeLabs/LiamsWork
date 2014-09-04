@@ -191,3 +191,16 @@ body{
             color:#fff;
             display:inline;
     }
+.context_menu{
+	background-color:#aaa;
+	width:8.5%;
+	height:8.5%;
+	float:left;
+	display:none;
+	
+}
+.context_menu_list{
+	margin-bottom:5%;
+	color:#000;
+	text-align:center;
+}

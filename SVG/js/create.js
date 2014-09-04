@@ -52,8 +52,7 @@ window.onload = function() {
                     e.attr({stroke: false});
                 })
                 selected.subject.attr({stroke: '#FFF', "stroke-width": "3"});
-                var colour =$("#picker").css( 'border-right-color' );
-                selected.subject.attr({"fill": colour});
+                
             }).showHandles().apply();
             // console.log(environment.shapes)
     };
@@ -102,7 +101,7 @@ function change_colour(element){
 	
 	var selected_colour = $(element).css( 'backgroundColor' );
 
-	$("#picker").css("border-right",selected_colour);
+	$("#picker").css("border-right-color",selected_colour);
 }
 
 
@@ -118,15 +117,18 @@ $('#close').on('click', function () {
 
 $(document).ready(function(){
 
-
-
 $(document).on("mousedown", "circle",function(e){
     
     if (e.which == 3){
     e.cancelBubble = true;
     e.preventDefault();
     e.stopPropagation();
-        alert("hi");
+    $(".context_menu").show();
+   
+
+    
+
+       
         return false;
         }
 });
@@ -142,14 +144,33 @@ function deleteItem(){
         selected.unplug();
     }
     selected.subject.remove();
-
+	 $(".context_menu").hide();
 }
+function duplicateItem(){
+var cloned =selected.subject.clone();
+	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
+                
+                selected = element;
+               
+                paper.forEach(function(e){
+                    e.attr({stroke: false});
+                })
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "3"});
+                
+            }).showHandles().apply();
+;
+
+	$(".context_menu").hide();
+	
+}
+
 
 function shapeOnClick()
 {
 
-	var colour =$("#picker").css( 'border-color' );
-	$(selected).attr({fill:colour});	
+	var colour =$("#picker").css( 'border-right-color' );
+                selected.subject.attr({"fill": colour});	
+                $(".context_menu").hide();
 }
 
 

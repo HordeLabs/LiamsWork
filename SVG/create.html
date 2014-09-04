@@ -1,5 +1,5 @@
 <!DOCTYPE html>	
-<html oncontextmenu="">	
+<html oncontextmenu="return false">	
 	<head>
 		<title>Create</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -46,9 +46,15 @@
 			<div id="brown" class="colour" onclick="change_colour(this)"></div>
 			<div id="grey" class="colour" onclick="change_colour(this)"></div>
 		</div>
-		
+	
 		
 		<button id="close" class="close">x</button>
+		
+			<div class="context_menu">
+			<div id="duplicate" class="context_menu_list" onclick="duplicateItem()">Duplicate</div>
+			<div id="change_colour" class="context_menu_list" onclick="shapeOnClick()">Change Colour</div>
+			<div id="delete_item" class="context_menu_list" onclick="deleteItem()">Delete Item</div>
+		</div>
 		
 	</body>
 			
