@@ -26,35 +26,48 @@
 				
 		
 		<input type="submit" onclick="go()" class="submit"/>
-		
+		<div class="menu_wrapper">
 				<div class="context_menu">
 					<hr class="divider"/>
-					<div id="duplicate" class="context_menu_list" onclick="duplicateItem()">Duplicate</div><hr class="divider"/>
-					<div id="change_colour" class="context_menu_list" onclick="pick()">Change Colour</div><hr class="divider"/>
-					<div id="delete_item" class="context_menu_list" onclick="deleteItem()">Delete Item</div><hr class="divider"/>
-					<div id="hide_handles" class="context_menu_list" onclick="hideHandle()">Hide Handles</div><hr class="divider"/>
-					<div id="show_handles" class="context_menu_list" onclick="showHandle()">Show Handles</div><hr class="divider"/>
-					<div id="send_back" class="context_menu_list" onclick="sendBack()">Send to back</div><hr class="divider"/>
-					<div id="send_front" class="context_menu_list" onclick="sendFront()">Send to front</div><hr class="divider"/>
+					<div class="duplicate">
+						<div id="duplicate" class="context_menu_list" onclick="duplicateItem()">Duplicate</div><hr class="divider"/>
+					</div>
+					<div class="change_colour">
+						<div id="change_colour" class="context_menu_list" onclick="pick()">Change Colour</div><hr class="divider"/>
+					</div>
+					<div class="delete_item">
+						<div id="delete_item" class="context_menu_list" onclick="deleteItem()">Delete Item</div><hr class="divider"/>
+					</div>
+					<div class="shape_options">
+						<div id="shape_options" class="context_menu_list" onclick="openOptions()">Shape Options</div><hr class="divider"/>
+					</div>
+					<div class="show_options">
+						<div class="hide_handles">
+							<div id="hide_handles" class="context_menu_list" onclick="hideHandle()">Lock Shape</div><hr class="divider"/>
+						</div>
+						<div class="send_back">
+							<div id="send_back" class="context_menu_list" onclick="sendBack()">Send to back</div><hr class="divider"/>
+						</div>
+						<div class="send_front">
+							<div id="send_front" class="context_menu_list" onclick="sendFront()">Send to front</div><hr class="divider"/>
+						</div>
+					</div>	
 				</div>		
-		
-		
+
+				<div id="box">
+					<div id="red" class="colour" onclick="change_colour(this)"></div>
+					<div id="green" class="colour" onclick="change_colour(this)"></div>
+					<div id="blue" class="colour" onclick="change_colour(this)"></div>
+					
+					<div id="orange" class="colour" onclick="change_colour(this)"></div>
+					<div id="yellow" class="colour" onclick="change_colour(this)"></div>
+					<div id="black" class="colour" onclick="change_colour(this)"></div>
 				
-		
-		<div id="box">
-			<div id="red" class="colour" onclick="change_colour(this)"></div>
-			<div id="green" class="colour" onclick="change_colour(this)"></div>
-			<div id="blue" class="colour" onclick="change_colour(this)"></div>
-			
-			<div id="orange" class="colour" onclick="change_colour(this)"></div>
-			<div id="yellow" class="colour" onclick="change_colour(this)"></div>
-			<div id="black" class="colour" onclick="change_colour(this)"></div>
-			
-			<div id="white" class="colour" onclick="change_colour(this)"></div>
-			<div id="brown" class="colour" onclick="change_colour(this)"></div>
-			<div id="grey" class="colour" onclick="change_colour(this)"></div>
-		</div>
-		
+					<div id="white" class="colour" onclick="change_colour(this)"></div>
+					<div id="brown" class="colour" onclick="change_colour(this)"></div>
+					<div id="grey" class="colour" onclick="change_colour(this)"></div>
+				</div>
+			</div>			
 		
 				
 			

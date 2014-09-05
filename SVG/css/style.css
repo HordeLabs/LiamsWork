@@ -40,10 +40,9 @@
 	background-color:#aaa;
 	width:8.5%;
 	height:110px;
-	float:left;
+	position:absolute;
 	display:none;
-	margin-top:2.5%;
-	margin-left:90%;
+	z-index:9999;
 }
 #red{
 	background-color:red;
@@ -199,13 +198,12 @@ body{
     }
 .context_menu{
 	background-color:#aaa;
-	width:8.5%;
-	height:8.5%;
-	float:left;
+
+	position:absolute;
 	display:none;
 	font-family: Quicksand;
-	margin-left:90%;
-	margin-top:0.5%;
+	z-index:9999;
+	
 	
 }
 .context_menu_list{
@@ -214,3 +212,18 @@ body{
 	text-align:center;
 	font-family: Quicksand;
 }
+.show_options{
+	
+	display:none;
+}
+
+
+
+
+
+
+
+
+
+
+

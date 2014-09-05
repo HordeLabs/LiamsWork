@@ -2,12 +2,15 @@ var environment = {};
 environment.shapes = Array();
 var paper = null;
 var colour = null;
+var mouseX;
+var mouseY;
 
 window.onload = function() {
     // Creates canvas 1000 × 1000 at 30, 100
     
-        paper = Raphael(30, 110, 1100, 500);
+        paper = Raphael(30, 110, 1220, 500);
         paper.canvas.style.backgroundColor = '#444';
+        
     var rect = paper.rect(55, 130, 50, 50).attr({fill: "#34C8FF",stroke: "0"}),
         circle = paper.circle(80, 100, 25).attr({fill: "#34C8FF",stroke: "0"}),
         path = paper.path("M50,68 L77,23 L105,68 z").attr({fill: "#34C8FF",stroke: "0"});
@@ -20,7 +23,7 @@ window.onload = function() {
             this.oy = this.attrs.y;
             this.lastdx ? this.ox += this.lastdx : this.ox = 0;
             this.lastdy ? this.oy += this.lastdy : this.oy = 0;
-            // console.log(this);
+            //console.log(this);
             this.attrs.class = "added";
            this.attr('class','context');
            
@@ -30,9 +33,9 @@ window.onload = function() {
             if(!this.clonedShape){ // if this shape is a clone then we don't want to create a new one
                 var cloned = this.clone();
                 cloned.drag(move, start, up);
-                this.cloneedShape = true;
+                this.clonedShape = true;
             }
-            this.translate(400,200);
+            this.translate(500,150);
 
     },
         move = function(dx, dy){ // function for the move event
@@ -80,8 +83,10 @@ function go(){
 }
 
 
-function pick(){
-	
+function pick(){//sets position of context menu based on mouse xy
+	mouseX = event.pageX;
+  	mouseY = event.pageY;
+ 	$("#box").css({'top':mouseY,'left':mouseX});
 	$("#box").show();
 }
 
@@ -95,7 +100,16 @@ $(document).mouseup(function (e)
         container.hide();
     }
 });
+$(document).mouseup(function (e)
+{
+    var menu_close = $(".context_menu");
 
+    if (!menu_close.is(e.target) // if the target of the click isn't the container...
+        && menu_close.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+        menu_close.hide();
+    }
+});
 
 function change_colour(element){
 			
@@ -117,6 +131,9 @@ $(document).on("mousedown", "circle,rect,path",function(e){
     e.cancelBubble = true;
     e.preventDefault();
     e.stopPropagation();
+    mouseX = event.pageX;
+  	mouseY = event.pageY;
+ 	$(".context_menu").css({'top':mouseY,'left':mouseX});
     $(".context_menu").show();
    
 
@@ -142,6 +159,7 @@ function deleteItem(){
 }
 function duplicateItem(){
 var cloned =selected.subject.clone();
+
 	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
                 
                 selected = element;
@@ -149,12 +167,11 @@ var cloned =selected.subject.clone();
                 paper.forEach(function(e){
                     e.attr({stroke: false});
                 })
-                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"}).class = "added";
+
                 
             }).showHandles().apply();
-;
-	selected.subject.attrs.class = "added";
-
+            cloned.attrs.class = "added";
 	$(".context_menu").hide();
 	
 }
@@ -191,10 +208,9 @@ var cloned =selected.subject.clone();
                 selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
                 
             }).hideHandles().apply();
-;
-	selected.subject.attrs.class = "added";
+	cloned.attrs.class = "added";
 	$(".context_menu").hide();
-
+	
 if(selected.freeTransform){
         selected.freeTransform.unplug();
     } else {
@@ -206,28 +222,14 @@ if(selected.freeTransform){
 }
 
 
-function showHandle(){
-var cloned =selected.subject.clone();
-	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
-                
-                selected = element;
-               
-                paper.forEach(function(e){
-                    e.attr({stroke: false});
-                })
-                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
-                
-            }).showHandles().apply();
-;
 
-	$(".context_menu").hide();
 
-if(selected.freeTransform){
-        selected.freeTransform.unplug();
-    } else {
-        selected.unplug();
-    }
-    selected.subject.remove();
-	 $(".context_menu").hide();
-	
+function openOptions(){
+	if($(".show_options").css("display")=="none"){
+	$(".show_options").show();
+	}
+	else{
+		$(".show_options").hide();
+	}
 }
+
