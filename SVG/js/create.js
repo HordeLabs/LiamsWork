@@ -212,7 +212,7 @@ $(document).on("mousedown", "circle,rect,path",function(e){
 });
 });
 
-$(document).ready(function(){
+/*$(document).ready(function(){
 
 $(document).on("mousedown", "circle,rect,path",function(e){
     
@@ -224,7 +224,7 @@ $(document).on("mousedown", "circle,rect,path",function(e){
         return false;
         }
 });
-});
+});*/
 
 
 
