@@ -8,16 +8,83 @@ var mouseY;
 window.onload = function() {
     // Creates canvas 1000 × 1000 at 30, 100
     
-        paper = Raphael(30, 110, 1220, 500);
+        paper = Raphael(0, 0, "100%", "100%");
         paper.canvas.style.backgroundColor = '#444';
+        var t = paper.text("50%", "8%", "Horde Labs").attr({fill: "#9A9A9A","font-size": 50, "font-family":"Quicksand"});
+        var button = paper.rect("1%","2%",100,50).attr({fill: "#9A9A9A",stroke: "1",stroke: '#FFF'});
+        var buttonText = paper.text("5%", "6%", "Submit").attr({fill: "#FFF","font-size": 15, "font-family":"Quicksand"});
         
-    var rect = paper.rect(55, 130, 50, 50).attr({fill: "#34C8FF",stroke: "0"}),
-        circle = paper.circle(80, 100, 25).attr({fill: "#34C8FF",stroke: "0"}),
-        path = paper.path("M50,68 L77,23 L105,68 z").attr({fill: "#34C8FF",stroke: "0"});
+        var helpButton = paper.rect("91%","2%",100,50).attr({fill: "#9A9A9A",stroke: "1",stroke: '#FFF'});
+        var helpText = paper.text("95%", "6%", "Help").attr({fill: "#FFF","font-size": 15, "font-family":"Quicksand"});
+
+    	var rect = paper.rect(30, 232, 50, 50).attr({fill: "#9A9A9A",stroke: "0"}),
+        circle = paper.circle(55, 200, 25).attr({fill: "#9A9A9A",stroke: "0"}),
+        path = paper.path("M30,168 L55,125 L80,168 z").attr({fill: "#9A9A9A",stroke: "0"});
+        
+		
+					
 		
 		
+		
+		
+		
+		
+		function hover(){
+			
+			var test = paper.rect("87.1%", "9%", 150, 200).attr({fill: "#9A9A9A",stroke: "1",stroke: '#FFF'});
+			var instruction = paper.text("93%", "13.5%", "Clicking the shapes on\n the left produces a\n clone in the centre of\n the paper.\n \n Right clicking on an\n added shape will open\n a context menu.\n \n Click Submit to store\n your environment.").attr({fill: "#FFF","font-size": 12, "font-family":"Quicksand"});
 
-
+			
+			helpButton.mouseout(function(){
+				test.remove();
+				instruction.remove();
+				
+			});
+			
+		}
+		
+		function buttonSelect(){
+			
+			button.attr({stroke:"1",stroke:"#000"});
+    		button.mouseout(function(){
+				button.attr({stroke:"1",stroke:"#FFF"});
+				
+			});
+		}
+	
+		button.click(function() 
+		{
+    		
+    		go();
+		});
+		button.mouseover(function() 
+		{
+    		
+		buttonSelect();
+    		
+		});
+		
+		
+		
+		buttonText.mouseover(function() 
+		{
+    		buttonSelect();
+		});
+		buttonText.click(function() 
+		{
+    		go();
+		});
+	
+		helpButton.mouseover(function(){
+			
+			hover();
+		});
+		helpText.mouseover(function(){
+			
+			hover();
+			
+		});
+		
     var start = function(){ // function for the start of the drag
             this.ox = this.attrs.x;
             this.oy = this.attrs.y;
@@ -55,7 +122,7 @@ window.onload = function() {
                 paper.forEach(function(e){
                     e.attr({stroke: false});
                 })
-                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "1.5"});
                 
             }).showHandles().apply();
             // console.log(environment.shapes)
@@ -100,6 +167,8 @@ $(document).mouseup(function (e)
         container.hide();
     }
 });
+
+
 $(document).mouseup(function (e)
 {
     var menu_close = $(".context_menu");
@@ -135,11 +204,23 @@ $(document).on("mousedown", "circle,rect,path",function(e){
   	mouseY = event.pageY;
  	$(".context_menu").css({'top':mouseY,'left':mouseX});
     $(".context_menu").show();
-   
-
-    
-
+    $(".show_options").hide();
+    $(".rotate_option").hide();
        
+        return false;
+        }
+});
+});
+
+$(document).ready(function(){
+
+$(document).on("mousedown", "circle,rect,path",function(e){
+    
+    if (e.which == 1 && e.ctrlKey){
+    e.cancelBubble = true;
+    e.preventDefault();
+    e.stopPropagation();
+    selected.subject.attr({stroke: 'red'}); 
         return false;
         }
 });
@@ -147,8 +228,8 @@ $(document).on("mousedown", "circle,rect,path",function(e){
 
 
 
-
 function deleteItem(){
+	
 	if(selected.freeTransform){
         selected.freeTransform.unplug();
     } else {
@@ -157,21 +238,11 @@ function deleteItem(){
     selected.subject.remove();
 	 $(".context_menu").hide();
 }
+
+
 function duplicateItem(){
-var cloned =selected.subject.clone();
-
-	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
-                
-                selected = element;
-               
-                paper.forEach(function(e){
-                    e.attr({stroke: false});
-                })
-                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"}).class = "added";
-
-                
-            }).showHandles().apply();
-            cloned.attrs.class = "added";
+	
+	copyKeep();
 	$(".context_menu").hide();
 	
 }
@@ -179,45 +250,44 @@ var cloned =selected.subject.clone();
 
 function shapeOnClick()
 {
-
-	
                 selected.subject.attr({"fill": colour});	
-                $(".context_menu").hide();
-                
+                $(".context_menu").hide();      
 }
 
-
 function sendBack(){
+	
 	selected.subject.toBack()+1;
 	$(".context_menu").hide();
 }
+
 function sendFront(){
+	
 	selected.subject.toFront();
 	$(".context_menu").hide();
 }
 
 function hideHandle(){
-var cloned =selected.subject.clone();
+	var cloned =selected.subject.clone();
 	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
                 
-                selected = element;
-               
-                paper.forEach(function(e){
+        selected = element;
+        	paper.forEach(function(e){
                     e.attr({stroke: false});
                 })
                 selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
                 
             }).hideHandles().apply();
-	cloned.attrs.class = "added";
-	$(".context_menu").hide();
+		cloned.attrs.class = "added";
+		$(".context_menu").hide();
 	
-if(selected.freeTransform){
-        selected.freeTransform.unplug();
-    } else {
-        selected.unplug();
-    }
-    selected.subject.remove();
-	 $(".context_menu").hide();
+	if(selected.freeTransform){
+        	selected.freeTransform.unplug();
+    } 
+    else {
+        		selected.unplug();
+    	}
+    	selected.subject.remove();
+	
 	
 }
 
@@ -232,4 +302,70 @@ function openOptions(){
 		$(".show_options").hide();
 	}
 }
+function copyRemove(){
+	var cloned =selected.subject.clone();
+	if(selected.freeTransform){
+        selected.freeTransform.unplug();
+    } else {
+        selected.unplug();
+    }
+    selected.subject.remove();
+
+	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
+                
+                selected = element;
+               
+                paper.forEach(function(e){
+                    e.attr({stroke: false});
+                })
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
+
+                
+            }).showHandles().apply();
+            cloned.attrs.class = "added";
+	
+	
+}
+function copyKeep(){
+	var cloned =selected.subject.clone();
+
+
+	ft = paper.freeTransform(cloned, { keepRatio: true	}, function(element){
+                
+                selected = element;
+               
+                paper.forEach(function(e){
+                    e.attr({stroke: false});
+                })
+                selected.subject.attr({stroke: '#FFF', "stroke-width": "1"});
+
+                
+            }).showHandles().apply();
+            cloned.attrs.class = "added";
+	
+	
+}
+function rotate45(){
+		copyRemove();
+             ft.attrs.rotate = ft.attrs.rotate+ 45;
+             $(".context_menu").hide();
+
+	
+}
+function rotate90(){
+		copyRemove();
+             ft.attrs.rotate = ft.attrs.rotate+ 90;
+             $(".context_menu").hide();
+
+	
+}
+function openRotate(){
+	if($(".rotate_option").css("display")=="none"){
+	$(".rotate_option").show();
+	}
+	else{
+		$(".rotate_option").hide();
+	}
+}
+
 

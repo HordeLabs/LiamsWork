@@ -21,11 +21,10 @@
 	</head>	
 	<body>	
 		
-		<p class="title">Horde Labs</p>
 	
-				
+			
 		
-		<input type="submit" onclick="go()" class="submit"/>
+		
 		<div class="menu_wrapper">
 				<div class="context_menu">
 					<hr class="divider"/>
@@ -42,6 +41,15 @@
 						<div id="shape_options" class="context_menu_list" onclick="openOptions()">Shape Options</div><hr class="divider"/>
 					</div>
 					<div class="show_options">
+						<div class="rotate">
+							<div id="rotate" class="context_menu_list" onclick="openRotate()">Rotate</div><hr class="divider"/>
+						</div>
+						<div class="rotate_option">
+							<div id="rotate_45" class="context_menu_list" onclick="rotate45()">Rotate 45</div><hr class="divider"/>
+						</div>
+						<div class="rotate_option">
+							<div id="rotate_90" class="context_menu_list" onclick="rotate90()">Rotate 90</div><hr class="divider"/>
+						</div>
 						<div class="hide_handles">
 							<div id="hide_handles" class="context_menu_list" onclick="hideHandle()">Lock Shape</div><hr class="divider"/>
 						</div>

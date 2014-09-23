@@ -216,9 +216,15 @@ body{
 	
 	display:none;
 }
+.rotate_option{
+	
+	display:none;
+}
 
-
-
+.selectedItem{
+	outline:10px solid pink;
+	
+}
 
 
 
